@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Performance Metrics{% endblock %}
+
+{% block content %}
+<h1>Performance Metrics</h1>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Asset Name</th>
+            <th>Average Buy Price</th>
+            <th>Total ROI (%)</th>
+            <th>Current Value</th>
+            <th>Total Units</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for performance in performance_data %}
+        <tr>
+            <td>{{ performance.asset_name }}</td>
+            <td>{{ performance.average_buy_price }}</td>
+            <td>{{ performance.total_roi }}%</td>
+            <td>{{ performance.current_value }}</td>
+            <td>{{ performance.total_units }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

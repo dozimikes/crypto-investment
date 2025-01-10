@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact Us - Crypto Dashboard{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="text-center mb-4">Get in Touch</h1>
+    <div class="row">
+        <div class="col-lg-6 mb-4">
+            <h3 class="text-warning">Contact Information</h3>
+            <p><strong>Email:</strong> support@cryptodashboard.com</p>
+            <p><strong>Phone:</strong> +1 234 567 890</p>
+            <p><strong>Address:</strong> 123 Crypto Lane, Blockchain City, USA</p>
+            <h4 class="mt-4 text-warning">Follow Us</h4>
+            <p>
+                <a href="#" class="text-warning me-3"><i class="fab fa-facebook"></i> Facebook</a>
+                <a href="#" class="text-warning me-3"><i class="fab fa-twitter"></i> Twitter</a>
+                <a href="#" class="text-warning"><i class="fab fa-linkedin"></i> LinkedIn</a>
+            </p>
+        </div>
+        <div class="col-lg-6">
+            <h3 class="text-warning">Send Us a Message</h3>
+            <form action="#" method="post">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Your Name</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Your Email</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="message" class="form-label">Message</label>
+                    <textarea class="form-control" id="message" name="message" rows="5" placeholder="Your message here..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-warning">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

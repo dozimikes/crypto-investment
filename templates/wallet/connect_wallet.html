@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Connect Your Wallet</h1>
+  <form method="post">
+    {% csrf_token %}
+    <input type="text" name="wallet_address" placeholder="Enter your wallet address" required>
+    <button type="submit">Connect Wallet</button>
+  </form>
+{% endblock %}

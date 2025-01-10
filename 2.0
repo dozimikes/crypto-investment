@@ -1,0 +1,5 @@
+Collecting urllib3
+  Using cached urllib3-2.3.0-py3-none-any.whl.metadata (6.5 kB)
+Using cached urllib3-2.3.0-py3-none-any.whl (128 kB)
+Installing collected packages: urllib3
+Successfully installed urllib3-2.3.0

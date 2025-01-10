@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Crypto Chart{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h1>Crypto Chart</h1>
+
+        <!-- Display Chart Data -->
+        <div>
+            <h2>Transaction Data</h2>
+            <ul>
+                <li>Jan: 10</li>
+                <li>Feb: 20</li>
+                <li>Mar: 30</li>
+            </ul>
+        </div>
+
+        <!-- If you are using JavaScript for the chart, you can include it here -->
+        <div id="crypto-chart-container">
+            <canvas id="cryptoChart" width="400" height="200"></canvas> <!-- Canvas for the chart -->
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_scripts %}
+    <!-- Include Chart.js script (if needed for this page) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        // Example chart data
+        var chart_data = {
+            labels: ['Jan', 'Feb', 'Mar'],  // Example labels
+            values: [10, 20, 30]  // Example values
+        };
+
+        var ctx = document.getElementById('cryptoChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line', // You can change this to 'bar', 'pie', etc.
+            data: {
+                labels: chart_data.labels, // Using the example labels
+                datasets: [{
+                    label: 'Transaction Data',
+                    data: chart_data.values, // Using the example values
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+{% endblock %}

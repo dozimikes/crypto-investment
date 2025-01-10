@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Wallet{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4 text-primary fw-bold">Your Wallet</h1>
+    <p class="text-center text-muted">Manage your funds seamlessly with deposits, withdrawals, and live crypto insights.</p>
+
+    <!-- Action Buttons (Centered with Bootstrap Grid) -->
+    <div class="row justify-content-center mt-5" style="height: 150px;">
+        <div class="col-2"></div>  <!-- Empty column to create space -->
+        <div class="col-2 text-center mb-3">
+            <a href="{% url 'deposit' %}" class="btn btn-success btn-md wallet-action-btn shadow w-100" style="margin: 0 10px;">
+                <i class="bi bi-wallet"></i> Deposit
+            </a>
+        </div>
+        <div class="col-2 text-center mb-3">
+            <a href="{% url 'withdraw' %}" class="btn btn-danger btn-md wallet-action-btn shadow w-100" style="margin: 0 10px;">
+                <i class="bi bi-cash"></i> Withdraw
+            </a>
+        </div>
+        <div class="col-2"></div>  <!-- Empty column to create space -->
+    </div>
+
+    <!-- Wallet Overview Flexbox Section (Inline, equally divided) -->
+    <div class="row mt-5" style="border-radius: 15px; padding: 15px;">
+        <div class="col-sm-12 col-md-4 text-center border p-3" style="border-radius: 15px;">
+            <h5 class="text-success fw-bold">Fiat Balance</h5>
+            <p class="display-6 text-dark">$ {{ wallet.fiat_balance }}</p>
+        </div>
+        <div class="col-sm-12 col-md-4 text-center border p-3" style="border-radius: 15px;">
+            <h5 class="text-primary fw-bold">Crypto Balance (BTC)</h5>
+            <p class="display-6 text-dark">{{ wallet.balance_btc }} BTC</p>
+        </div>
+        <div class="col-sm-12 col-md-4 text-center border p-3" style="border-radius: 15px;">
+            <h5 class="text-warning fw-bold">Crypto Value (USD)</h5>
+            <p class="display-6 text-dark">$ {{ crypto_balance_usd }}</p>
+        </div>
+    </div>
+
+    <!-- Transaction History Section -->
+    <div class="mt-5">
+        <h3 class="text-center text-primary fw-bold">Transaction History</h3>
+        <table class="table table-hover mt-4">
+            <thead class="table-dark">
+                <tr>
+                    <th>Date</th>
+                    <th>Transaction</th>
+                    <th>Amount</th>
+                    <th>Currency</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for transaction in transactions %}
+                    <tr>
+                        <td>{{ transaction.timestamp|date:"Y-m-d H:i" }}</td>
+                        <td>{{ transaction.transaction_type }}</td>
+                        <td>{{ transaction.amount }}</td>
+                        <td>{{ transaction.currency }}</td>
+                        <td>
+                            <span class="badge 
+                                {% if transaction.status == 'completed' %} bg-success 
+                                {% elif transaction.status == 'pending' %} bg-warning 
+                                {% else %} bg-danger 
+                                {% endif %}"
+                            ">
+                                {{ transaction.status }}
+                            </span>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="5" class="text-center">No transactions found.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Styles -->
+<style>
+    .wallet-action-btn {
+        padding: 10px 25px;
+        font-size: 16px;
+        transition: all 0.3s ease-in-out;
+        border-radius: 50px;
+    }
+
+    .wallet-action-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #f9f9f9;
+    }
+
+    @media (max-width: 768px) {
+        .flex-item {
+            flex: 1 1 100%; /* Full width on smaller screens */
+        }
+    }
+</style>
+
+{% endblock %}

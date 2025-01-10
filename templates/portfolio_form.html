@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Create Portfolio{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Create Portfolio</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.as_p }}  <!-- Render form fields -->
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Create Portfolio</button>
+    </form>
+
+    <br>
+    {% if messages %}
+        <div class="alert alert-info">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

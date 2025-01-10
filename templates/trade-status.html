@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+    <h1 class="mt-4">Trade Status</h1>
+
+    <div class="mt-4">
+      <p><strong>Token:</strong> {{ trade.token }}</p>
+      <p><strong>Amount:</strong> {{ trade.amount|floatformat:8 }}</p>
+      <p><strong>Price (per token):</strong> ${{ trade.price|floatformat:2 }}</p>
+      <p><strong>Order Type:</strong> {{ trade.order_type|title }}</p>
+      <p><strong>Total Value:</strong> 
+        ${{ trade.amount|floatformat:8 }} × ${{ trade.price|floatformat:2 }} = ${{ trade.amount|mul:trade.price|floatformat:2 }}
+      </p>
+      <p><strong>Status:</strong> 
+        {% if trade.status == 'PENDING' %}
+          <span class="text-warning">Pending</span>
+        {% elif trade.status == 'COMPLETED' %}
+          <span class="text-success">Completed</span>
+        {% elif trade.status == 'FAILED' %}
+          <span class="text-danger">Failed</span>
+        {% else %}
+          <span class="text-info">Unknown</span>
+        {% endif %}
+      </p>
+
+      {% if trade.transaction_hash %}
+        <p><strong>Transaction Hash:</strong> 
+          <a href="https://www.blockchain.com/btc/tx/{{ trade.transaction_hash }}" target="_blank" class="text-primary">
+            {{ trade.transaction_hash }}
+          </a>
+        </p>
+      {% else %}
+        <p><strong>Transaction Hash:</strong> Transaction is still pending...</p>
+      {% endif %}
+    </div>
+
+    <a href="{% url 'trade' %}" class="btn btn-secondary mt-4">Place New Trade</a>
+  </div>
+{% endblock %}

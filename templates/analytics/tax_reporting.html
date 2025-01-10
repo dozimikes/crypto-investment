@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Tax Reporting{% endblock %}
+
+{% block content %}
+<h1>Tax Reporting</h1>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Asset Name</th>
+            <th>Transaction Type</th>
+            <th>Amount</th>
+            <th>Units</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for report in tax_report %}
+        <tr>
+            <td>{{ report.asset_name }}</td>
+            <td>{{ report.transaction_type }}</td>
+            <td>{{ report.amount }}</td>
+            <td>{{ report.units }}</td>
+            <td>{{ report.date }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

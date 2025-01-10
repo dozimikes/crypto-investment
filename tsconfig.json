@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "es5",                      // Target ECMAScript version
+    "lib": ["dom", "es2015"],             // Include necessary library files for web and ES6
+    "module": "commonjs",                 // CommonJS modules (for Node.js-like behavior)
+    "strict": true,                       // Enable strict type-checking options
+    "esModuleInterop": true,              // Allow import/export compatibility between ES and CommonJS
+    "skipLibCheck": true,                 // Skip type-checking of declaration files
+    "outDir": "./static/js",              // Directory for compiled JavaScript files
+    "rootDir": "./src",                   // Root directory for TypeScript source files
+    "sourceMap": true                     // Generate source maps for debugging
+  },
+  "include": [
+    "src/**/*"                            // Include all TypeScript files in the 'src' folder
+  ],
+  "exclude": [
+    "node_modules"                        // Exclude the 'node_modules' directory
+  ]
+}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Profit & Loss Analysis{% endblock %}
+
+{% block content %}
+<h1>Profit & Loss Analysis</h1>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Asset Name</th>
+            <th>Total Invested</th>
+            <th>Current Value</th>
+            <th>Gain/Loss</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for result in results %}
+        <tr>
+            <td>{{ result.asset_name }}</td>
+            <td>{{ result.total_invested }}</td>
+            <td>{{ result.current_value }}</td>
+            <td>{{ result.gain_loss }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

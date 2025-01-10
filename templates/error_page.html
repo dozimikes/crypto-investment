@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Error{% endblock %}
+
+{% block content %}
+<div class="container mt-5 text-center">
+    <h1 class="display-4 text-danger">Oops!</h1>
+    <p class="lead">Something went wrong. We couldn't process your request.</p>
+    <p class="text-muted">Please try again later or contact support if the issue persists.</p>
+    <a href="{% url 'dashboard' %}" class="btn btn-primary mt-3">Go to Dashboard</a>
+</div>
+{% endblock %}

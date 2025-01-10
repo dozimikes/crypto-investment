@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Deposit History{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Deposit History</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Amount</th>
+                <th>Currency</th>
+                <th>Status</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for deposit in deposits %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ deposit.amount }}</td>
+                <td>{{ deposit.currency }}</td>
+                <td>
+                    {% if deposit.status == 'completed' %}
+                        <span class="badge bg-success">Completed</span>
+                    {% elif deposit.status == 'pending' %}
+                        <span class="badge bg-warning">Pending</span>
+                    {% else %}
+                        <span class="badge bg-danger">Failed</span>
+                    {% endif %}
+                </td>
+                <td>{{ deposit.date }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="text-center">No deposits found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,431 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home - CryptoCoin{% endblock %}
+
+{% block content %}
+    <div id="header" class="banner header-slider">
+        <div class="single-slide light row-vm" style="background-image:url({% static 'assets/images/header-bg-a.jpg' %})">
+            <div class="container">
+                <div class="banner-content">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h1 class="animate-bottom delayms5">Bitcoin Exchange <br><span class="ucap">YOU CAN TRUST</span></h1>
+                            <p class="lead animate-bottom delayms7">Sed ut persp iciatis unde omnis iste natus error sit volup tatem accusa ntium dolor emque lauda ntium, totam rem aperiam, eaque ipsa quae ab illo inven tore veri.</p>
+                            <ul class="btns animate-bottom delayms9">
+                                <li><a href="{% url 'about' %}" class="btn">View more</a></li>
+                                <li><a href="{% url 'signup' %}" class="btn btn-outline">Try It</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="single-slide light row-vm" style="background-image:url({% static 'assets/images/header-bg-b.jpg' %})">
+            <div class="container">
+                <div class="banner-content">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3 text-center">
+                            <h1 class="animate-bottom delayms5">Bitcoin Exchange <br><span class="ucap">YOU CAN TRUST</span></h1>
+                            <p class="lead animate-bottom delayms7">Sed ut persp iciatis unde omnis iste natus error sit volup tatem accusa ntium dolor emque lauda ntium, totam rem aperiam, eaque ipsa quae ab illo inven tore veri.</p>
+                            <ul class="btns animate-bottom delayms9">
+                                <li><a href="#" class="btn">View more</a></li>
+                                <li><a href="#" class="btn btn-outline">Try It</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="features-box section section-pad">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-3 col-sm-6 res-m-bttm">
+                    <div class="box box-alt-bg round shadow">
+                        <img src="{% static 'assets/images/box-icon-a.png' %}" alt="box-icon" class="box-icon">
+                        <h6 class="ucap">Licensed Lbourg</h6>
+                        <p class="small">Compliant with dolorts adipis sit ametcon sectetur.</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 res-m-bttm">
+                    <div class="box box-alt-bg round shadow">
+                        <img src="{% static 'assets/images/box-icon-b.png' %}" alt="box-icon" class="box-icon">
+                        <h6 class="ucap">NO HIDDEN FEES</h6>
+                        <p class="small">Lorem ipsum dolor sit amet, contetur adipiscing eli.</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 res-m-bttm">
+                    <div class="box box-alt-bg round shadow">
+                        <img src="{% static 'assets/images/box-icon-c.png' %}" alt="box-icon" class="box-icon">
+                        <h6 class="ucap">INSTANT TRADING</h6>
+                        <p class="small">Dolore magna aliqa. Ut enim ad minim venim, quis.</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="box box-alt-bg round shadow">
+                        <img src="{% static 'assets/images/box-icon-d.png' %}" alt="box-icon" class="box-icon">
+                        <h6 class="ucap">SECURE trusted</h6>
+                        <p class="small">Conse ctetur adipi scing elit, sed do eiusmod tempor.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section section-pad bg-grey">
+        <div class="container">
+            <div class="row row-vm">
+                <div class="col-md-5">
+                    <div class="round mgr--30 res-m-bttm"><img src="{% static 'assets/images/photo-md-a.jpg' %}" alt="photo-md" class="img-shadow"></div>
+                </div>
+                <div class="col-md-6 col-md-offset-1">
+                    <div class="text-block">
+                        <h2>Bitcoin is an innovative &amp; a new kind of money.</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <a href="{% url 'about' %}" class="btn btn-alt">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section section-pad">
+        <div class="container">
+            <div class="section-head">
+                <div class="row text-center">
+                    <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+                        <h2 class="heading-section">Why choose Us</h2>
+                        <p>Sed ut perspi ciatis unde omnis iste natus error sit volup tatem accusa ntium dolor emque lauda ntium, totam rem aperiam</p>
+                    </div>
+                </div>
+            </div>
+            <div class="gaps size-3x"></div>
+            <div class="row text-center row-vm">
+                <div class="col-md-4 res-m-bttm-lg">
+                    <div class="box-alt">
+                        <span class="pe pe-7s-server"></span>
+                        <h4>Payment Options</h4>
+                        <p>Morbi eget varius risus, ut venenatis libero Pellentesque in porta dui.</p>
+                    </div>
+                    <div class="box-alt">
+                        <span class="pe pe-7s-note"></span>
+                        <h4>Legal Compliance</h4>
+                        <p>Morbi eget varius risus, ut venenatis libero Pellentesque in porta dui.</p>
+                    </div>
+                    <div class="box-alt">
+                        <span class="pe pe-7s-airplay"></span>
+                        <h4>Cross-Platform Trading</h4>
+                        <p>Morbi eget varius risus, ut venenatis libero Pellentesque in porta dui.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 res-m-bttm-lg">
+                    <div class="box-alt">
+                        <span class="pe pe-7s-lock"></span>
+                        <h4>Strong Security</h4>
+                        <p>Morbi eget varius risus, ut venenatis libero Pellentesque in porta dui.</p>
+                    </div>
+                    <div class="box-alt img">
+                        <img src="{% static 'assets/images/square-md-a.png' %}" alt="square">
+                    </div>
+                    <div class="box-alt">
+                        <span class="pe pe-7s-cash"></span>
+                        <h4>Competitive Commissions</h4>
+                        <p>Morbi eget varius risus, ut venenatis libero Pellentesque in porta dui.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="box-alt">
+                        <span class="pe pe-7s-global"></span>
+                        <h4>World Coverage</h4>
+                        <p>Morbi eget varius risus, ut venenatis libero Pellentesque in porta dui.</p>
+                    </div>
+                    <div class="box-alt">
+                        <span class="pe pe-7s-graph"></span>
+                        <h4>Advanced Reporting</h4>
+                        <p>Morbi eget varius risus, ut venenatis libero Pellentesque in porta dui.</p>
+                    </div>
+                    <div class="box-alt">
+                        <span class="pe pe-7s-graph1"></span>
+                        <h4>Margin Trading</h4>
+                        <p>Morbi eget varius risus, ut venenatis libero Pellentesque in porta dui.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End Section -->
+    
+    <!-- section -->
+    <div class="section-pad section">
+        <div class="container">
+            <div class="section-head">
+                <div class="row text-center">
+                    <div class="col-md-6 col-md-offset-3">
+                        <h2 class="heading-section">SUBSCRIPTION PLANS</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="gaps size-3x"></div>
+            <div class="row text-center">
+                <!-- Bronze Booster Plan -->
+                <div class="col-md-4 col-md-offset-0 col-sm-8 col-sm-offset-2 res-m-bttm">
+                    <div class="box-miner box-miner-alt">
+                        <div class="box-miner-price">
+                            2%
+                        </div>
+                        <h4 class="box-miner-title">Bronze Booster</h4>
+                        <ul class="box-miner-list">
+                            <li><span>Minimum: 100 USD</span></li>
+                            <li><span>Maximum: 9999 USD</span></li>
+                            <li><span>PRINCIPAL INCLUDED</span></li>
+                            <li><span>Duration 5 Days</span></li>
+                            <li><span>Referral Commission: 10%</span></li>
+                        </ul>
+                        <form action="{% url 'select_plan' %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="plan_name" value="Bronze Booster">
+                            <input type="hidden" name="min_amount" value="100">
+                            <input type="hidden" name="max_amount" value="9999">
+                            <input type="hidden" name="interest_rate" value="2%">
+                            <button type="submit" class="btn btn-md btn-alt">Select Plan</button>
+                        </form>
+                    </div>
+                </div>
+    
+                <!-- Silver Surge Plan -->
+                <div class="col-md-4 col-md-offset-0 col-sm-8 col-sm-offset-2 res-m-bttm">
+                    <div class="box-miner box-miner-alt">
+                        <div class="box-miner-price">
+                            2.5%
+                        </div>
+                        <h4 class="box-miner-title">Silver Surge</h4>
+                        <ul class="box-miner-list">
+                            <li><span>Minimum: $10,000 USD</span></li>
+                            <li><span>Maximum: $19,999 USD</span></li>
+                            <li><span>PRINCIPAL INCLUDED</span></li>
+                            <li><span>Duration 5 Days</span></li>
+                            <li><span>Referral Commission: 10%</span></li>
+                        </ul>
+                        <form action="{% url 'select_plan' %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="plan_name" value="Silver Surge">
+                            <input type="hidden" name="min_amount" value="10000">
+                            <input type="hidden" name="max_amount" value="19999">
+                            <input type="hidden" name="interest_rate" value="2.5%">
+                            <button type="submit" class="btn btn-md btn-alt">Select Plan</button>
+                        </form>
+                    </div>
+                </div>
+    
+                <!-- Gold Growth Plan -->
+                <div class="col-md-4 col-md-offset-0 col-sm-8 col-sm-offset-2">
+                    <div class="box-miner box-miner-alt">
+                        <div class="box-miner-price">
+                            3%
+                        </div>
+                        <h4 class="box-miner-title">Gold Growth</h4>
+                        <ul class="box-miner-list">
+                            <li><span>Minimum: $20,000 USD</span></li>
+                            <li><span>Maximum: $49,999 USD</span></li>
+                            <li><span>PRINCIPAL INCLUDED</span></li>
+                            <li><span>Duration 5 Days</span></li>
+                            <li><span>Referral Commission: 10%</span></li>
+                        </ul>
+                        <form action="{% url 'select_plan' %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="plan_name" value="Gold Growth">
+                            <input type="hidden" name="min_amount" value="20000">
+                            <input type="hidden" name="max_amount" value="49999">
+                            <input type="hidden" name="interest_rate" value="3%">
+                            <button type="submit" class="btn btn-md btn-alt">Select Plan</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+       	<!--Section -->
+       	<div class="section section-pad bg-grey">
+            <div class="container">
+                <div class="row row-vm">
+                    <div class="col-md-6">
+                     <div class="trendingview-chart res-m-bttm">
+                         <!-- TradingView Widget BEGIN -->
+                         <script src="https://s3.tradingview.com/tv.js"></script>
+                            <script>
+                                new TradingView.widget({
+                                    "autosize": true,
+                                    "symbol": "BINANCE:BTCUSDT", // Example: Bitcoin/USDT pair on Binance
+                                    "interval": "1", // 1-minute interval for real-time updates
+                                    "timezone": "Etc/UTC",
+                                    "theme": "dark", // Use "light" for a light theme
+                                    "style": "1", // Candlestick style
+                                    "locale": "en",
+                                    "toolbar_bg": "#1f2430", // Background color of the toolbar
+                                    "enable_publishing": false,
+                                    "hide_top_toolbar": false, // Show the toolbar for advanced options
+                                    "hide_legend": false, // Show the legend for context
+                                    "save_image": false, // Disable image saving
+                                    "allow_symbol_change": true, // Allow users to switch trading pairs
+                                    "studies": ["MACD@tv-basicstudies", "RSI@tv-basicstudies"], // Add indicators like MACD and RSI
+                                    "container_id": "tradeview-widget"
+                                });
+                            </script>
+                            <div class="trade-buttons" style="position: absolute; top: 20px; right: 20px; z-index: 5;">
+                                <button id="buyButton" style="margin: 5px; padding: 5px 15px; background: green; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                                    Buy
+                                </button>
+                                <button id="sellButton" style="margin: 5px; padding: 5px 15px; background: red; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                                    Sell
+                                </button>
+                            </div>
+                         <!-- TradingView Widget END -->
+                     </div>
+                    </div>
+                    <div class="col-md-5 col-md-offset-1 ">
+                     <div class="text-block">
+                         <h2>No Experience? <br/>No worries</h2>
+                         <p>Looking to get started in the world of cryptocurrency trading sit amet tristique?</p>
+                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc et lorem nec felis finibus laoreet. Nullam id dictum urna. Vestibulum in aliquam tellus, sit amet tristique ipsum. </p>
+                         <a href="{% url 'signup' %}" class="btn btn-alt">get started</a>
+                     </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End Section -->
+        
+        <!--Section -->
+        <div class="section section-pad">
+            <div class="container">
+                <div class="section-head">
+                 <div class="row text-center">
+                     <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+                         <h2 class="heading-section">What investors say</h2>
+                         <p>Sed ut perspi ciatis unde omnis iste natus error sit volup tatem accusa ntium dolor emque lauda ntium, totam rem aperiam</p>
+                     </div>
+                 </div>
+                </div>
+                <div class="gaps size-3x"></div>
+                <div class="row text-center">
+                    <div class="col-md-6 col-md-offset-3">
+                        <div class="testimonial-carousel has-carousel" data-items="1" data-loop="true" data-dots="true" data-auto="true">
+                            <div class="testimonial-item">
+                                <div class="client-photo circle">
+                                    <img src=" {% static 'assets/images//client-a.jpg' %} " alt="client">
+                                    <em class="fa fa-quote-right"></em>
+                                </div>
+                                <blockquote>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi.</blockquote>
+                                <div class="client-info">
+                                    <h6>John Doe</h6>
+                                    <span>CEO, Company Name</span>
+                                </div>
+                            </div>
+                            <div class="testimonial-item">
+                                <div class="client-photo circle">
+                                    <img src=" {% static 'assets/images//client-a.jpg' %} " alt="client">
+                                    <em class="fa fa-quote-right"></em>
+                                </div>
+                                <blockquote>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi.</blockquote>
+                                <div class="client-info">
+                                    <h6>John Doe</h6>
+                                    <span>CEO, Company Name</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End Section -->
+        
+        
+        <!-- Section -->
+     <div class="section section-pad-sm cta-small light">
+         <div class="cta-block">
+             <div class="container">
+                 <div class="row mobile-center">
+                     <div class="col-md-12">
+                         <div class="cta-sameline">
+                             <h3>Open account for free and start trading Bitcoins now!</h3>
+                             <a class="btn btn-outline btn-alt btn-md" href="{% url 'signup' %}">get started</a>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+     <!-- End Section -->
+       
+       <!--Section -->
+        <div class="section section-pad">
+            <div class="container">
+                <div class="section-head">
+                 <div class="row text-center">
+                     <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+                         <h2 class="heading-section">our latest news</h2>
+                         <p>Sed ut perspi ciatis unde omnis iste natus error sit volup tatem accusa ntium dolor emque lauda ntium, totam rem aperiam</p>
+                     </div>
+                 </div>
+                </div>
+                <div class="gaps size-3x"></div>
+                <div class="row text-center">
+                    <div class="col-md-4 col-md-offset-0 col-sm-8 col-sm-offset-2 res-m-bttm-lg">
+                        <div class="blog-post shadow round">
+                            <div class="post-thumb"><a href=" {% static 'blog-single.html' %} "><img src=" {% static 'assets/images//post-thumb-a.jpg' %} " alt="post"></a></div>
+                            <div class="post-entry">
+                                <div class="post-meta"><span>Posted 03 Dec, 2017</span></div>
+                                <h5><a href=" {% static 'blog-single.html' %} ">Working Hard to Keep Pace with very heigh Demand</a></h5>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incidi dunt ut labore.</p>
+                                <a href=" {% static 'blog-single.html' %} " class="btn-icon"><span class="pe pe-7s-angle-right"></span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-md-offset-0 col-sm-8 col-sm-offset-2 res-m-bttm-lg">
+                        <div class="blog-post shadow round">
+                            <div class="post-thumb"><a href=" {% static 'blog-single.html' %} "><img src=" {% static 'assets/images//post-thumb-b.jpg' %} " alt="post"></a></div>
+                            <div class="post-entry">
+                                <div class="post-meta"><span>Posted 03 Dec, 2017</span></div>
+                                <h5><a href=" {% static 'blog-single.html' %} ">Black Friday: Bitcoins the biggest deal on from today</a></h5>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incidi dunt ut labore.</p>
+                                <a href=" {% static 'blog-single.html' %} " class="btn-icon"><span class="pe pe-7s-angle-right"></span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-md-offset-0 col-sm-8 col-sm-offset-2 res-m-bttm-lg">
+                        <div class="blog-post shadow round">
+                            <div class="post-thumb"><a href=" {% static 'blog-single.html' %} "><img src=" {% static 'assets/images//post-thumb-c.jpg' %} " alt="post"></a></div>
+                            <div class="post-entry">
+                                <div class="post-meta"><span>Posted 03 Dec, 2017</span></div>
+                                <h5><a href=" {% static 'blog-single.html' %} ">Introducing our new payment services...</a></h5>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incidi dunt ut labore.</p>
+                                <a href=" {% static 'blog-single.html' %} " class="btn-icon"><span class="pe pe-7s-angle-right"></span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End Section -->
+       
+        <!-- Section -->
+     <div class="section section-pad-md bg-grey">
+         <div class="container">
+             <div class="content row">
+                 <div class="owl-carousel has-carousel no-dots"  data-items="6" data-loop="true" data-dots="false" data-auto="false">
+                     <div class="logo-item"><img alt="" width="190" height="82" src=" {% static 'assets/images//cl-logo1.png' %} "></div>
+                     <div class="logo-item"><img alt="" width="190" height="82" src=" {% static 'assets/images//cl-logo2.png' %} "></div>
+                     <div class="logo-item"><img alt="" width="190" height="82" src=" {% static 'assets/images//cl-logo3.png' %} "></div>
+                     <div class="logo-item"><img alt="" width="190" height="82" src=" {% static 'assets/images//cl-logo4.png' %} "></div>
+                     <div class="logo-item"><img alt="" width="190" height="82" src=" {% static 'assets/images//cl-logo5.png' %} "></div>
+                     <div class="logo-item"><img alt="" width="190" height="82" src=" {% static 'assets/images//cl-logo6.png' %} "></div>
+                 </div>
+
+             </div>
+         </div>	
+     </div>
+     <!-- End Section -->
+{% endblock %}

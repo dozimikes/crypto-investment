@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Withdraw Funds{% endblock %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="col-lg-6 col-md-8">
+        <h2 class="text-center text-primary">Withdraw Funds</h2>
+        <p class="text-center text-muted mb-4">Withdraw funds from your wallet in cryptocurrency.</p>
+
+        <!-- Withdraw Form -->
+        <form method="POST" id="withdraw-form">
+            {% csrf_token %}
+            
+            <div class="mb-3">
+                <label for="coin_type" class="form-label">Coin Type:</label>
+                <select name="coin_type" id="coin_type" class="form-select" required>
+                    <option value="">Select Coin Type</option>
+                    <option value="BTC">BTC</option>
+                    <option value="ETH">ETH</option>
+                    <option value="USDT">USDT</option>
+                    <option value="SOL">SOL</option>
+                    <option value="TRX">TRX</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="wallet_address" class="form-label">Wallet Address:</label>
+                <input type="text" name="wallet_address" id="wallet_address" class="form-control" placeholder="Wallet Address" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="chain_type" class="form-label">Chain Type:</label>
+                <select name="chain_type" id="chain_type" class="form-select" required>
+                    <option value="">Select a coin type first</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="withdrawable_amount" class="form-label">Withdrawable Amount:</label>
+                <input type="number" name="withdrawable_amount" id="withdrawable_amount" class="form-control" placeholder="Available Balance" readonly>
+            </div>
+
+            <div class="mb-3">
+                <label for="transaction_fee" class="form-label">Transaction Fee:</label>
+                <input type="number" name="transaction_fee" id="transaction_fee" class="form-control" placeholder="Transaction Fee" readonly>
+            </div>
+
+            <div class="mb-3">
+                <label for="amount_to_receive" class="form-label">Amount to be Received:</label>
+                <input type="number" name="amount_to_receive" id="amount_to_receive" class="form-control" placeholder="Amount to Receive" readonly>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary w-100 mt-3">Confirm Withdrawal</button>
+        </form>
+
+        <!-- Error Message -->
+        <div id="withdraw-error-message" class="alert alert-danger mt-3" style="display: none;"></div>
+    </div>
+</div>
+
+<script>
+    const coinTypeSelect = document.getElementById('coin_type');
+    const chainTypeSelect = document.getElementById('chain_type');
+
+    // Fetch KuCoin data for predefined coin types
+    const defaultCoins = ['BTC', 'ETH', 'USDT', 'SOL', 'TRX'];
+    const coinNetworks = {
+        'BTC': ['BTC', 'BCH', 'ETH'],
+        'ETH': ['ETH', 'ERC20'],
+        'USDT': ['TRC20', 'ERC20'],
+        'SOL': ['SOL', 'SPL'],
+        'TRX': ['TRC20']
+    };
+
+    // Populate chain types based on selected coin
+    coinTypeSelect.addEventListener('change', function() {
+        const selectedCoin = this.value;
+
+        if (coinNetworks[selectedCoin]) {
+            chainTypeSelect.innerHTML = '<option value="">Select Chain Type</option>';
+            coinNetworks[selectedCoin].forEach(network => {
+                const option = document.createElement('option');
+                option.value = network;
+                option.textContent = network;
+                chainTypeSelect.appendChild(option);
+            });
+        } else {
+            chainTypeSelect.innerHTML = '<option value="">Select a coin type first</option>';
+        }
+    });
+
+    // Set default coin types
+    coinTypeSelect.innerHTML = '<option value="">Select Coin Type</option>';
+    defaultCoins.forEach(coin => {
+        const option = document.createElement('option');
+        option.value = coin;
+        option.textContent = coin;
+        coinTypeSelect.appendChild(option);
+    });
+
+</script>
+
+{% endblock %}

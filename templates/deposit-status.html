@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+    <h1>Deposit Status</h1>
+
+    <p><strong>Transaction Hash:</strong> {{ tx_hash }}</p>
+    <p><strong>Status:</strong> 
+      {% if status == 'Confirmed' %}
+        <span class="text-success">Confirmed</span>
+      {% elif status == 'Pending' %}
+        <span class="text-warning">Pending</span>
+      {% else %}
+        <span class="text-danger">Failed</span>
+      {% endif %}
+    </p>
+
+    <a href="{% url 'deposit' %}" class="btn btn-secondary mt-4">Go Back</a>
+  </div>
+{% endblock %}

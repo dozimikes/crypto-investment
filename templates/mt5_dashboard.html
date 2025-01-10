@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block title %} MetaTrader 5 Dashboard {% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>MetaTrader 5 Integration</h2>
+    <p>{{ connection_response }}</p> <!-- Show connection status -->
+
+    <!-- MetaTrader 5 Chart Display -->
+    <div id="mt5-chart-container">
+        <h4>MT5 Chart for EUR/USD (Hourly)</h4>
+        <canvas id="mt5-chart" width="600" height="400"></canvas>
+    </div>
+
+    <!-- MetaTrader Controls -->
+    <button id="connect-mt5" class="btn btn-primary">Connect to MetaTrader 5</button>
+    <button id="get-account-info" class="btn btn-secondary">Get Account Info</button>
+    <button id="place-trade" class="btn btn-success">Place Trade</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Using Chart.js for the chart -->
+
+<script>
+    // Connect to MT5 automatically on page load (optional)
+    document.addEventListener("DOMContentLoaded", function () {
+        fetch('/connect_to_mt5/')
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                document.getElementById('mt5-connection-status').innerText = data.success || data.error;
+                if (data.success) {
+                    loadMt5Chart();
+                }
+            });
+    });
+
+    // Fetch and render MT5 chart data
+    function loadMt5Chart() {
+        fetch('/get_mt5_chart/')
+            .then(response => response.json())
+            .then(data => {
+                const chartData = data.chart_data;
+                const timestamps = chartData.map(item => new Date(item.timestamp * 1000).toLocaleString()); // Convert to readable format
+                const prices = chartData.map(item => item.close);
+
+                // Using Chart.js to display the chart
+                const ctx = document.getElementById('mt5-chart').getContext('2d');
+                const chart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: timestamps,
+                        datasets: [{
+                            label: 'EUR/USD Price',
+                            data: prices,
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            fill: false
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            x: { type: 'category', labels: timestamps },
+                            y: { ticks: { beginAtZero: false } }
+                        }
+                    }
+                });
+            });
+    }
+
+    // Event listeners for buttons (example)
+    document.getElementById('connect-mt5').addEventListener('click', function() {
+        fetch('/connect_to_mt5/')
+            .then(response => response.json())
+            .then(data => alert(data.success || data.error));
+    });
+</script>
+{% endblock %}

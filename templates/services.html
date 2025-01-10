@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Services - Crypto Dashboard{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="text-center mb-4">Our Services</h1>
+    <div class="row">
+        {% for service in services %}
+        <div class="col-md-4 mb-4">
+            <div class="card text-center bg-dark text-white h-100 shadow-sm service-card">
+                <div class="card-body">
+                    <i class="{{ service.icon }} fa-3x mb-3 text-warning"></i>
+                    <h5 class="card-title">{{ service.title }}</h5>
+                    <p class="card-text">{{ service.description }}</p>
+                </div>
+                <div class="card-footer bg-transparent border-top border-warning">
+                    <a href="{{ service.link }}" class="btn btn-warning">Learn More</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    .service-card:hover {
+        transform: scale(1.05);
+        transition: transform 0.3s ease-in-out;
+    }
+</style>
+{% endblock %}

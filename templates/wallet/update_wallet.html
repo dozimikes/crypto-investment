@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Update Wallet{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Update Wallet</h2>
+
+    <p>Use this form to update your wallet balances. Ensure the values entered are correct before saving.</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        
+        <!-- Bitcoin Balance -->
+        <div class="mb-3">
+            <label for="id_balance_btc" class="form-label">BTC Balance</label>
+            {{ form.balance_btc }}
+        </div>
+
+        <!-- Ethereum Balance -->
+        <div class="mb-3">
+            <label for="id_balance_eth" class="form-label">ETH Balance</label>
+            {{ form.balance_eth }}
+        </div>
+
+        <!-- USD Balance -->
+        <div class="mb-3">
+            <label for="id_balance_usd" class="form-label">USD Balance</label>
+            {{ form.balance_usd }}
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form>
+
+    <hr>
+
+    <a href="{% url 'wallet' %}" class="btn btn-secondary">Back to Wallet</a>
+</div>
+{% endblock %}

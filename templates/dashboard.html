@@ -1,0 +1,228 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
+{% load humanize %}
+
+{% block title %}
+    Home - Crypto Dashboard
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <!-- Display Messages -->
+    {% if messages %}
+        <div class="alert-container">
+            {% for message in messages %}
+                <div class="alert alert-info" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- Welcome Section -->
+    {% if user.is_authenticated %}
+        <h2>Welcome, {{ user.username }}!</h2>
+        <p>Your current portfolio is displayed below.</p>
+    {% else %}
+        <h2>Welcome to the Crypto Dashboard</h2>
+        <p>Sign up or log in to track your personal portfolio.</p>
+    {% endif %}
+
+    <!-- Top 10 Cryptocurrencies Section with Trading Actions -->
+    <div class="mt-5 row">
+        <div class="col-md-8">
+            <h3>Top 10 Cryptocurrencies by Market Cap</h3>
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Symbol</th>
+                        <th>Name</th>
+                        <th>Price (USD)</th>
+                        <th>Market Cap</th>
+                        <th>24h Price Change (%)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for crypto in top_10_crypto_data_global %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ crypto.symbol|upper }}</td>
+                            <td>{{ crypto.name }}</td>
+                            <td>${{ crypto.current_price|floatformat:2 }}</td>
+                            <td>${{ crypto.market_cap|intcomma }}</td>
+                            <td class="{% if crypto.price_change_percentage_24h > 0 %}text-success{% else %}text-danger{% endif %}">
+                                {{ crypto.price_change_percentage_24h|floatformat:2 }}%
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="6" class="text-center">No data available</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-4 d-flex flex-column justify-content-center align-items-center">
+            <h3 class="text-center">Trading Actions</h3>
+            <form id="trade-form" method="POST" action="{% url 'place_trade' %}" class="w-75 mb-3">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="tradeAmount" class="form-label">Trade Amount (USD):</label>
+                    <input type="number" class="form-control" id="tradeAmount" name="trade_amount" min="0.01" step="0.01" required>
+                </div>
+                <div class="d-flex w-100 justify-content-between">
+                    <button type="submit" class="btn btn-primary w-48 trading-btn">Place Trade</button>
+                    {% if latest_trade %}
+                        <a href="{% url 'trade_status' trade_id=latest_trade.id %}" class="btn btn-info w-48 trading-btn">Trade Status</a>
+                    {% else %}
+                        <button class="btn btn-info w-48 trading-btn" disabled>No Trades Yet</button>
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {% if user.is_authenticated %}
+        <!-- User Portfolio Section -->
+        <div class="mt-5">
+            <h3>Your Portfolio</h3>
+            {% if user_portfolio %}
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Total Portfolio Value</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Total Value:</strong> ${{ user_portfolio.total_value|floatformat:2 }}</p>
+                        <p><strong>Asset Count:</strong> {{ user_portfolio.asset_count }}</p>
+                    </div>
+                </div>
+            {% else %}
+                <p>You do not have any assets in your portfolio yet.</p>
+            {% endif %}
+        </div>
+
+        <!-- User Cryptocurrencies Section -->
+        <div class="mt-5">
+            <h3>Your Cryptocurrencies</h3>
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Cryptocurrency</th>
+                        <th>Symbol</th>
+                        <th>Quantity</th>
+                        <th>24h Price Change (%)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for crypto in user_cryptocurrencies %}
+                        <tr>
+                            <td>{{ crypto.name }}</td>
+                            <td>{{ crypto.symbol }}</td>
+                            <td>{{ crypto.quantity }}</td>
+                            {% with price_change=crypto_price_changes|get_item:crypto.name %}
+                                <td class="{% if price_change > 0 %}text-success{% else %}text-danger{% endif %}">
+                                    {{ price_change|floatformat:2 }}%
+                                </td>
+                            {% endwith %}
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="4" class="text-center">You have no cryptocurrencies in your portfolio.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+
+    <!-- Real-Time Cryptocurrency Chart Section -->
+    <div class="mt-5">
+        <h3>Real-Time Cryptocurrency Chart</h3>
+        <div class="card">
+            <div class="card-header">
+                <h4>Market Trends</h4>
+            </div>
+            <div class="card-body">
+                <div id="crypto-chart" style="height: 400px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const chartElement = document.querySelector("#crypto-chart");
+        const options = {
+            chart: {
+                type: 'line',
+                height: 400,
+                animations: {
+                    enabled: true,
+                    easing: 'easeinout',
+                    speed: 800,
+                },
+            },
+            series: [{
+                name: "Price",
+                data: []
+            }],
+            xaxis: {
+                type: 'datetime'
+            }
+        };
+        const chart = new ApexCharts(chartElement, options);
+        chart.render();
+
+        function fetchChartData() {
+            fetch('/crypto_chart/')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === "success") {
+                        const chartData = data.data.map(item => ({
+                            x: new Date(item.timestamp * 1000),
+                            y: item.price
+                        }));
+                        chart.updateSeries([{ name: "Price", data: chartData }]);
+                    } else {
+                        console.error("Error fetching chart data:", data.message);
+                    }
+                })
+                .catch(error => console.error("Error loading chart:", error));
+        }
+
+        // Fetch chart data every 10 seconds for real-time updates
+        fetchChartData();
+        setInterval(fetchChartData, 10000);
+
+        // Handle trade form submission
+        document.getElementById('trade-form').addEventListener('submit', function (e) {
+            e.preventDefault();  // Prevent default form submission
+
+            const formData = new FormData(this);
+            fetch(this.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.redirect_url) {
+                    // Redirect to wallet page if insufficient balance
+                    window.location.href = data.redirect_url;
+                } else if (data.success) {
+                    alert('Trade placed successfully!');
+                } else {
+                    alert(data.error || 'An unknown error occurred.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    });
+</script>
+
+{% endblock %}

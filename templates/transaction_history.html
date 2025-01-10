@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block title %}Transaction History{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Transaction History</h2>
+
+    <!-- Deposits Section -->
+    <div class="mb-5">
+        <h3>Deposits</h3>
+        <table class="table table-bordered table-hover">
+            <thead class="thead-light">
+                <tr>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Currency</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for deposit in deposits %}
+                    <tr>
+                        <td>{{ deposit.created_at|date:"Y-m-d H:i" }}</td>
+                        <td>${{ deposit.amount|floatformat:2 }}</td>
+                        <td>{{ deposit.currency|upper }}</td>
+                        <td>
+                            {% if deposit.status == 'PENDING' %}
+                                <span class="text-warning">Pending</span>
+                            {% elif deposit.status == 'COMPLETED' %}
+                                <span class="text-success">Completed</span>
+                            {% elif deposit.status == 'FAILED' %}
+                                <span class="text-danger">Failed</span>
+                            {% else %}
+                                <span class="text-info">Unknown</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="4" class="text-center">No deposits found.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Withdrawals Section -->
+    <div class="mb-5">
+        <h3>Withdrawals</h3>
+        <table class="table table-bordered table-hover">
+            <thead class="thead-light">
+                <tr>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Currency</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for withdrawal in withdrawals %}
+                    <tr>
+                        <td>{{ withdrawal.created_at|date:"Y-m-d H:i" }}</td>
+                        <td>${{ withdrawal.amount|floatformat:2 }}</td>
+                        <td>{{ withdrawal.currency|upper }}</td>
+                        <td>
+                            {% if withdrawal.status == 'PENDING' %}
+                                <span class="text-warning">Pending</span>
+                            {% elif withdrawal.status == 'COMPLETED' %}
+                                <span class="text-success">Completed</span>
+                            {% elif withdrawal.status == 'FAILED' %}
+                                <span class="text-danger">Failed</span>
+                            {% else %}
+                                <span class="text-info">Unknown</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="4" class="text-center">No withdrawals found.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

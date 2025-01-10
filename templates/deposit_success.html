@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Deposit Successful{% endblock %}
+
+{% block content %}
+<div class="container section section-pad">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <h3 class="text-center text-success">Deposit Successful</h3>
+            <p class="text-center">{{ message }}</p>
+            <div class="text-center">
+                <a href="{% url 'wallet' %}" class="btn btn-primary">Go to Wallet</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}Setup 2FA{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h3>Set up Two-Factor Authentication</h3>
+
+    <!-- Phone Number Form -->
+    <h4>Update Phone Number</h4>
+    <form method="POST">
+        {% csrf_token %}
+        {{ phone_number_form.as_p }}
+        <button type="submit" name="update_phone" class="btn btn-primary">Submit</button>
+    </form>
+
+    {% if profile.phone_number %}
+    <!-- Verification Code Form -->
+    <h4>Verify Phone Number</h4>
+    <form method="POST">
+        {% csrf_token %}
+        {{ verify_form.as_p }}
+        <button type="submit" name="verify_phone" class="btn btn-success">Verify</button>
+    </form>
+    {% endif %}
+
+    <!-- Toggle 2FA -->
+    <h4>Toggle 2FA via Authenticator App</h4>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" name="toggle_2fa" class="btn btn-info">
+            {% if profile.is_2fa_enabled %}
+                Disable 2FA
+            {% else %}
+                Enable 2FA
+            {% endif %}
+        </button>
+    </form>
+
+    <br>
+
+    <!-- Setup QR Code for 2FA -->
+    <h4>Scan QR Code with Your Authenticator App</h4>
+    <p>Scan the QR code below with your authentication app to enable 2FA.</p>
+    <img src="https://api.qrserver.com/v1/create-qr-code/?data={{ otp_uri }}" alt="QR Code">
+
+    <p>Or enter this key manually: <strong>{{ secret }}</strong></p>
+</div>
+{% endblock %}

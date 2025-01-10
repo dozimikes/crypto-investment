@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block title %}Trade - Crypto Platform{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Make a New Trade</h1>
+
+    <!-- Display Messages -->
+    {% if messages %}
+        <div class="alert-container">
+            {% for message in messages %}
+                <div class="alert alert-info" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- Trade Form -->
+    <form method="post" class="trade-form">
+        {% csrf_token %}
+        <div class="mb-3">
+            {{ form.as_p }}
+        </div>
+        <button type="submit" class="btn btn-primary">Submit Trade</button>
+    </form>
+
+    <hr class="mt-5">
+
+    <!-- Current Trades Section -->
+    <h2>Your Current Trades</h2>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Token</th>
+                    <th>Order Type</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for trade in trades %}
+                    <tr>
+                        <td>{{ trade.token }}</td>
+                        <td>{{ trade.order_type|capfirst }}</td>
+                        <td>{{ trade.amount|floatformat:8 }}</td>
+                        <td>
+                            {% if trade.status == 'PENDING' %}
+                                <span class="text-warning">Pending</span>
+                            {% elif trade.status == 'COMPLETED' %}
+                                <span class="text-success">Completed</span>
+                            {% elif trade.status == 'FAILED' %}
+                                <span class="text-danger">Failed</span>
+                            {% else %}
+                                <span class="text-info">Unknown</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="{% url 'trade-detail' trade.id %}" class="btn btn-info btn-sm">View Details</a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="5" class="text-center">No trades available.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
